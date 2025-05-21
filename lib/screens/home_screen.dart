@@ -1,3 +1,4 @@
+import 'package:bloc_api_6_7/bloc/count_bloc.dart';
 import 'package:bloc_api_6_7/screens/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,10 +10,10 @@ class Screen1 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Screen 1")),
       body: Center(
-        child: BlocBuilder<CounterCubit, CounterState>(
+        child: BlocBuilder<CountBloc, CountState>(
           builder: (context, state) {
             return Text(
-              "Counter: ${state.counter}",
+              "Counter: ${state.count}",
               style: TextStyle(fontSize: 28),
             );
           },
@@ -22,11 +23,13 @@ class Screen1 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: () => context.read<CounterCubit>().increment(),
+            heroTag: 'incrementBtn',
+            onPressed: () => context.read<CountBloc>().add(Increment()),
             child: const Icon(Icons.add),
           ),
           const SizedBox(height: 10),
           FloatingActionButton(
+            heroTag: 'navbar',
             onPressed:
                 () => Navigator.push(
                   context,

@@ -1,5 +1,5 @@
 class Product {
-  final int? id;
+  final int id;
   final String title;
   final double price;
   final String description;
@@ -8,7 +8,7 @@ class Product {
   final Rating rating;
 
   Product({
-    this.id,
+    required this.id,
     required this.title,
     required this.price,
     required this.description,

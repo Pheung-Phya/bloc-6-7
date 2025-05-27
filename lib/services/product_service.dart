@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:bloc_api_6_7/constant/api_constant.dart';
 import 'package:bloc_api_6_7/models/product.dart';
 import 'package:http/http.dart' as http;
@@ -17,10 +16,18 @@ class ProductService {
       final List<dynamic> data = json.decode(response.body);
       final List<Product> products =
           data.map((json) => Product.fromJson(json)).toList();
-      log('Fetched ${products.length} products: $products');
       return products;
     } else {
       throw Exception("Failed to load products: ${response.statusCode}");
+    }
+  }
+
+  Future<Product> fetchProductById(int id) async {
+    final response = await http.get(Uri.parse('$_apiUrl/$id'));
+    if (response.statusCode == 200) {
+      return Product.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("Failed to load product detail");
     }
   }
 }

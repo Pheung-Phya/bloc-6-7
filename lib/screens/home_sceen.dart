@@ -1,3 +1,4 @@
+import 'package:bloc_api_6_7/screens/details_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +21,14 @@ class HomeSceen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final product = state.products[index];
                 return ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailsScreen(productId: product.id),
+                      ),
+                    );
+                  },
                   leading: CachedNetworkImage(
                     imageUrl: product.image,
                     progressIndicatorBuilder:
